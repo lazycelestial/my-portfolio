@@ -1,0 +1,324 @@
+/* =============================================================*
+   MONOCHROME SCROLLBAR
+*============================================================= */
+
+/* Preloader curtain opening upward with an inclined effect */
+#preloader {
+  transform-origin: top left;
+  transform: translateY(0) rotate(0deg);
+  opacity: 1;
+  visibility: visible;
+
+  transition:
+    transform 1.2s cubic-bezier(0.76, 0, 0.24, 1),
+    visibility 0s linear 1.2s;
+
+  will-change: transform;
+}
+
+#preloader.preloader-open {
+  transform: translateY(-110%);
+  opacity: 1;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #27272a;
+  border: 1px solid #ffffff;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ffffff;
+}
+
+/* =============================================================*
+   DARK MATRIX BACKGROUND GRID
+*============================================================= */
+
+.mono-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.085) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.085) 1px, transparent 1px);
+  background-size: 40px 40px;
+  background-position: center top;
+}
+
+/* =============================================================*
+   CUSTOM RETICLE CURSOR
+*============================================================= */
+
+.custom-cursor {
+  pointer-events: none;
+  position: fixed;
+  width: 26px;
+  height: 26px;
+  border: 1px solid #ffffff;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 50%;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: width 0.15s, height 0.15s;
+}
+
+.custom-cursor-dot {
+  pointer-events: none;
+  position: fixed;
+  width: 4px;
+  height: 4px;
+  background: #ffffff;
+  border-radius: 50%;
+  z-index: 10000;
+  transform: translate(-50%, -50%);
+}
+
+/* =============================================================*
+   INVERT HOVER EFFECT
+*============================================================= */
+
+.hover-invert {
+  transition: all 0.2s ease;
+}
+
+.hover-invert:hover {
+  background: #ffffff !important;
+  color: #000000 !important;
+}
+
+/* =============================================================*
+   CLEAN RECTANGLE HOVER ANIMATIONS
+*============================================================= */
+
+.hover-box {
+  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1),
+    border-color 0.25s ease,
+    box-shadow 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.hover-box:hover {
+  border-color: #ffffff !important;
+  transform: translate(-3px, -3px);
+  box-shadow: 6px 6px 0px 0px #ffffff !important;
+}
+
+/* =============================================================*
+   BUTTON HOVER STATE
+*============================================================= */
+
+.hover-button {
+  transition: all 0.2s ease;
+}
+
+.hover-button:hover {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border-color: #ffffff !important;
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px 0px #ffffff !important;
+}
+
+/* =============================================================*
+   INTERACTIVE TEXT GLOW ANIMATION FOR BODY/QUOTES
+*============================================================= */
+
+.hover-char {
+  transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+
+.hover-char:hover {
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+/* =============================================================*
+   TYPEWRITER SUBTEXT GLITCH CLASS
+*============================================================= */
+
+.typewriter-subtext {
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+.typewriter-subtext:hover {
+  color: #ffffff !important;
+}
+
+/* =============================================================*
+   TOP STATUS BADGES — GREEN FLICKER
+*============================================================= */
+
+.status-online {
+  animation: online-flicker 0.5s infinite ease-in-out;
+}
+
+@keyframes online-flicker {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.2;
+  }
+}
+
+/* =============================================================*
+   NAME HOVER ANIMATION — MATCHES PHOTO RED/BLUE GLITCH
+*============================================================= */
+
+.name-glitch-hover {
+  display: inline-block;
+  position: relative;
+  user-select: none;
+}
+
+/* Red and blue text layers */
+.name-glitch-hover::before,
+.name-glitch-hover::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0;
+  white-space: nowrap;
+}
+
+/* Blue layer */
+.name-glitch-hover::before {
+  color: #ffffff;
+  mix-blend-mode: screen;
+}
+
+/* Red layer */
+.name-glitch-hover::after {
+  color: #ffffff;
+  mix-blend-mode: screen;
+}
+
+/* Blue glitch — same speed and opacity as photo */
+.name-glitch-hover:hover::before {
+  opacity: 0.38;
+  filter: drop-shadow(-2px 0px 0px rgba(0, 80, 255, 0.7));
+  animation: photo-glitch-blue-anim 0.55s infinite steps(4);
+}
+
+/* Red glitch — same speed and opacity as photo */
+.name-glitch-hover:hover::after {
+  opacity: 0.38;
+  filter: drop-shadow(2px 0px 0px rgba(255, 0, 40, 0.7));
+  animation: photo-glitch-red-anim 0.45s infinite steps(4);
+}
+
+/* =============================================================*
+   SUBTLE RED & BLUE PHOTO GLITCH
+   LITTLE OFFSET + CONTROLLED SLICES
+*============================================================= */
+
+.subtle-glitch-photo {
+  position: relative;
+}
+
+.subtle-glitch-photo .photo-glitch-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  mix-blend-mode: screen;
+  transition: opacity 0.3s ease;
+}
+
+.subtle-glitch-photo:hover .photo-base {
+  filter: contrast(130%) brightness(102%);
+}
+
+/* Blue shift — vivid electric blue */
+.subtle-glitch-photo:hover .photo-glitch-blue {
+  opacity: 0.38;
+  filter: drop-shadow(-2px 0px 0px rgba(0, 80, 255, 0.7));
+  animation: photo-glitch-blue-anim 0.55s infinite steps(4);
+}
+
+/* Red shift — vivid crimson red */
+.subtle-glitch-photo:hover .photo-glitch-red {
+  opacity: 0.38;
+  filter: drop-shadow(2px 0px 0px rgba(255, 0, 40, 0.7));
+  animation: photo-glitch-red-anim 0.45s infinite steps(4);
+}
+
+/* Blue glitch slices */
+@keyframes photo-glitch-blue-anim {
+  0% {
+    transform: translate(-2px, -1px);
+    clip-path: inset(12% 0 45% 0);
+  }
+
+  25% {
+    transform: translate(1px, 1px);
+    clip-path: inset(62% 0 10% 0);
+  }
+
+  50% {
+    transform: translate(-2.5px, 0.5px);
+    clip-path: inset(28% 0 35% 0);
+  }
+
+  75% {
+    transform: translate(1.5px, -1px);
+    clip-path: inset(82% 0 4% 0);
+  }
+
+  100% {
+    transform: translate(-1.5px, 1px);
+    clip-path: inset(5% 0 70% 0);
+  }
+}
+
+/* Red glitch slices */
+@keyframes photo-glitch-red-anim {
+  0% {
+    transform: translate(2px, 1px);
+    clip-path: inset(35% 0 25% 0);
+  }
+
+  25% {
+    transform: translate(-1.5px, -1px);
+    clip-path: inset(8% 0 65% 0);
+  }
+
+  50% {
+    transform: translate(2.5px, -0.5px);
+    clip-path: inset(72% 0 15% 0);
+  }
+
+  75% {
+    transform: translate(-1px, 1.5px);
+    clip-path: inset(48% 0 22% 0);
+  }
+
+  100% {
+    transform: translate(1.5px, -1px);
+    clip-path: inset(18% 0 52% 0);
+  }
+}
+
+/* =============================================================*
+   HIGHLIGHTED SOCIAL BOXES WITH HOVER ANIMATION
+*============================================================= */
+
+.social-box {
+  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1),
+    background-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.social-box:hover {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  transform: translate(-3px, -3px);
+  box-shadow: 6px 6px 0px 0px rgba(255, 255, 255, 0.7) !important;
+}
